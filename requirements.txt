@@ -1,0 +1,54 @@
+Requirements
+
+Students:
+[x] student name 
+[x] student identifier
+
+Module:
+[x] module name
+[x] module identifier
+[x] marks for each modules
+
+System:
+[x] list of Students and modules they are registered for
+[x] list of modules and the list of students registered
+
+Files:
+
+[x] module info
+[x] student info
+
+
+Input:
+
+[x] student id
+
+Output:
+
+[x] List of modules student is registered for
+[x] Marks for each module
+
+Input:
+
+[x] Module number
+
+Output:
+
+[x] List of students registered
+[x] Marks for each student
+
+Output:
+
+[x] List of all student names
+[x] Student average marks
+
+Output:
+
+[x] List of all module names
+[x] Average marks in the module
+
+Design:
+
+[x] variables meaningful
+[x] at least one class
+[x] recursive loop on 1 / 4 outputs

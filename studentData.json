@@ -1,0 +1,44 @@
+
+
+{
+    "student1": {
+        "student_id": 90,
+        "name": "john",
+        "modules":[
+            {"module_id": 101, "mark": 80},
+            {"module_id": 103, "mark": 30}
+        ]
+    }
+    ,  "student2": {
+        "student_id": 100,
+        "name": "mike",
+        "modules":[
+            {"module_id": 101, "mark": 10},
+            {"module_id": 105, "mark": 30}
+        ]
+    }
+    , "student3": {
+        "student_id": 110,
+        "name": "mary",
+        "modules":[
+            {"module_id": 101, "mark": 90},
+            {"module_id": 107, "mark": 30}
+        ]
+    }
+    , "student4": {
+        "student_id": 120,
+        "name": "jake",
+        "modules":[
+            {"module_id": 101, "mark": 44},
+            {"module_id": 109, "mark": 45}
+        ]
+    }
+    , "student5": {
+        "student_id": 130,
+        "name": "fin",
+        "modules":[
+            {"module_id": 111, "mark": 44},
+            {"module_id": 109, "mark": 70}
+        ]
+    }
+}
