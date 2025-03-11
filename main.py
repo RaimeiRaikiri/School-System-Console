@@ -1,23 +1,24 @@
 import json, students, modules, system
 
 
-# Loads json information to main.py
-def read_files(module_file_name, students_file_name):
-    with open(f"{module_file_name}", "r") as openFile:
-        modules_data_object = json.load(openFile)
+# Loads json information to main.py, returns the info as dictionaries
+def read_files(module_file_name: str, students_file_name: str) -> tuple[dict, dict] | None:
+    with open(f"{module_file_name}", "r") as open_file:
+        modules_data_object = json.load(open_file)
     
-    with open(f"{students_file_name}", "r") as openFile:
-        students_data_object = json.load(openFile)
+    with open(f"{students_file_name}", "r") as open_file:
+        students_data_object = json.load(open_file)
         
     return modules_data_object, students_data_object
     
-def insert_modules_in_system(modules_data: dict):
+def insert_modules_in_system(modules_data: dict) -> None:
+    # Iterates over the dictionary keys (module names) and adds each module to the school system obj
     for module_key in modules_data.keys():
         
         module = modules.Module(module_key, modules_data[module_key])
         school_system.add_module(module)
         
-def insert_student_info_in_system(students_data):
+def insert_student_info_in_system(students_data: dict) -> None:
     for student_key in students_data.keys():
         
         student = students.Student(students_data[student_key]["name"], students_data[student_key]["student_id"])
@@ -32,7 +33,7 @@ def insert_student_info_in_system(students_data):
         school_system.add_student(student)
             
             
-def find_a_students_modules(student_id):
+def find_a_students_modules(student_id: int) -> None:
     for student in school_system.student_list:
         
         if student.id == student_id:
@@ -42,7 +43,7 @@ def find_a_students_modules(student_id):
                 print("-- Name: ", student.modules[module_key][0].name, "   Mark: ", student.modules[module_key][1])
                 
 
-def find_students_in_module(module_id):
+def find_students_in_module(module_id: int) -> None:
     for module in school_system.modules_list:
         
         if module.id == module_id:
@@ -50,13 +51,13 @@ def find_students_in_module(module_id):
             for student in module.students:
                 print("-- Student name: ", student.name, " -- Mark: ", student.modules[module_id][1])
       
-def print_module_averages():
+def print_module_averages() -> None:
     for module in school_system.modules_list:
         module.calculate_average_marks()
         print("Module name: ", module.name, "-- Average mark: ", module.average_marks)
 
     
-def print_student_averages_recursive():
+def print_student_averages_recursive() -> None:
     student_list_length = len(school_system.student_list)
     
     recursive_loop(0, student_list_length, 1)
@@ -68,7 +69,7 @@ def recursive_loop(start, end, step):
         return
     
 # Only needs to loop up as there is only one instance of a recursive loop
-# and the loop only needs to increase 
+# and the loop only needs to increase to iterate through an iterable obj
 def loop_up(start, end, step):
     if start >= end:
         return 
