@@ -11,14 +11,14 @@ def read_files(module_file_name: str, students_file_name: str) -> tuple[dict, di
         
     return modules_data_object, students_data_object
     
-def insert_modules_in_system(modules_data: dict) -> None:
+def insert_modules_in_system(modules_data: dict, school_system: system) -> None:
     # Iterates over the dictionary keys (module names) and adds each module to the school system obj
     for module_key in modules_data.keys():
         
         module = modules.Module(module_key, modules_data[module_key])
         school_system.add_module(module)
         
-def insert_student_info_in_system(students_data: dict) -> None:
+def insert_student_info_in_system(students_data: dict, school_system: system) -> None:
     for student_key in students_data.keys():
         
         student = students.Student(students_data[student_key]["name"], students_data[student_key]["student_id"])
@@ -33,7 +33,7 @@ def insert_student_info_in_system(students_data: dict) -> None:
         school_system.add_student(student)
             
             
-def find_a_students_modules(student_id: int) -> None:
+def find_a_students_modules(student_id: int, school_system: system) -> None:
     for student in school_system.student_list:
         
         if student.id == student_id:
@@ -43,7 +43,7 @@ def find_a_students_modules(student_id: int) -> None:
                 print("-- Name: ", student.modules[module_key][0].name, "   Mark: ", student.modules[module_key][1])
                 
 
-def find_students_in_module(module_id: int) -> None:
+def find_students_in_module(module_id: int, school_system: system) -> None:
     for module in school_system.modules_list:
         
         if module.id == module_id:
@@ -51,32 +51,32 @@ def find_students_in_module(module_id: int) -> None:
             for student in module.students:
                 print("-- Student name: ", student.name, " -- Mark: ", student.modules[module_id][1])
       
-def print_module_averages() -> None:
+def print_module_averages(school_system: system) -> None:
     for module in school_system.modules_list:
         module.calculate_average_marks()
         print("Module name: ", module.name, "-- Average mark: ", module.average_marks)
 
     
-def print_student_averages_recursive() -> None:
+def print_student_averages_recursive(school_system: system) -> None:
     student_list_length = len(school_system.student_list)
     
-    recursive_loop(0, student_list_length, 1)
+    recursive_loop(0, student_list_length, 1, school_system)
 
-def recursive_loop(start, end, step):
+def recursive_loop(start, end, step, school_system: system):
     if step > 0 and start < end:
-        loop_up(start, end, step)
+        loop_up(start, end, step, school_system)
     else: 
         return
     
 # Only needs to loop up as there is only one instance of a recursive loop
 # and the loop only needs to increase to iterate through an iterable obj
-def loop_up(start, end, step):
+def loop_up(start, end, step, school_system: system):
     if start >= end:
         return 
     else:
         student = school_system.student_list[start]
         print("Student name: ", student.name, "-- Average mark: ", student.average_mark)
-        loop_up(start + step, end, step)
+        loop_up(start + step, end, step, school_system)
 
 
         
@@ -90,8 +90,8 @@ school_system = system.System()
 
 modData, studentData = read_files("modData.json", "studentData.json")
 
-insert_modules_in_system(modData)
-insert_student_info_in_system(studentData)
+insert_modules_in_system(modData, school_system)
+insert_student_info_in_system(studentData, school_system)
 
 
 
@@ -104,27 +104,27 @@ module_id = 109
 print()
 print("List modules for a student")
 print()
-find_a_students_modules(student_id)
+find_a_students_modules(student_id, school_system)
 print()
 print("------------------------")
 print()
 
 print("Find all students in a module")
 print()
-find_students_in_module(module_id)
+find_students_in_module(module_id, school_system)
 print()
 print("------------------------")
 print()
 
 print("List of student average marks")
 print()
-print_student_averages_recursive()
+print_student_averages_recursive(school_system)
 print()
 print("------------------------")
 print()
 
 print("List of module average marks")
 print()
-print_module_averages()
+print_module_averages(school_system)
 print()
 
