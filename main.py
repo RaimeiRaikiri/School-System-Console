@@ -34,31 +34,31 @@ def insert_student_info_in_system(students_data: dict, school_system: system) ->
             
             
 def find_a_students_modules(student_id: int, school_system: system) -> None:
-    for student in school_system.student_list:
+    for student in school_system.get_students_list():
         
-        if student.id == student_id:
-            print("Student name: ", student.name)
+        if student.get_id() == student_id:
+            print("Student name: ", student.get_name())
             print("Modules:")
-            for module_key in student.modules.keys():
-                print("-- Name: ", student.modules[module_key][0].name, "   Mark: ", student.modules[module_key][1])
+            for module_key in student.get_modules().keys():
+                print("-- Name: ", student.get_modules()[module_key][0].get_name(), "   Mark: ", student.get_modules()[module_key][1])
                 
 
 def find_students_in_module(module_id: int, school_system: system) -> None:
-    for module in school_system.modules_list:
+    for module in school_system.get_modules_list():
         
-        if module.id == module_id:
-            print("Module name: ", module.name)
-            for student in module.students:
-                print("-- Student name: ", student.name, " -- Mark: ", student.modules[module_id][1])
+        if module.get_id() == module_id:
+            print("Module name: ", module.get_name())
+            for student in module.get_students_list():
+                print("-- Student name: ", student.get_name(), " -- Mark: ", student.get_modules()[module_id][1])
       
 def print_module_averages(school_system: system) -> None:
-    for module in school_system.modules_list:
+    for module in school_system.get_modules_list():
         module.calculate_average_marks()
-        print("Module name: ", module.name, "-- Average mark: ", module.average_marks)
+        print("Module name: ", module.get_name(), "-- Average mark: ", module.get_average_marks())
 
     
 def print_student_averages_recursive(school_system: system) -> None:
-    student_list_length = len(school_system.student_list)
+    student_list_length = len(school_system.get_students_list())
     
     recursive_loop(0, student_list_length, 1, school_system)
 
@@ -74,8 +74,8 @@ def loop_up(start, end, step, school_system: system):
     if start >= end:
         return 
     else:
-        student = school_system.student_list[start]
-        print("Student name: ", student.name, "-- Average mark: ", student.average_mark)
+        student = school_system.get_students_list()[start]
+        print("Student name: ", student.get_name(), "-- Average mark: ", student.get_average_mark())
         loop_up(start + step, end, step, school_system)
 
 

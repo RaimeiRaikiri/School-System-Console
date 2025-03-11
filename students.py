@@ -1,15 +1,15 @@
 class Student:
     
     def __init__(self, name, id):
-        self.name = name
-        self.id = id
+        self.__name = name
+        self.__id = id
         
-        self.modules = { }
+        self.__modules = { }
 
-        self.average_mark = 0
-        
+        self.__average_mark = 0
+    
     def add_module(self, module_id, module, mark):
-        self.modules.update( {module_id:
+        self.__modules.update( {module_id:
             [module, mark] 
             })
         # Updates the average evertime a module is added
@@ -19,8 +19,20 @@ class Student:
         total_marks = 0
         number_of_marks = 0
         
-        for module_key in self.modules.keys():
-            total_marks += self.modules[module_key][1]
+        for module_key in self.get_modules().keys():
+            total_marks += self.get_modules()[module_key][1]
             number_of_marks += 1
             
-        self.average_mark = total_marks / number_of_marks
+        self.__average_mark = total_marks / number_of_marks
+        
+    def get_name(self):
+        return self.__name
+    
+    def get_id(self):
+        return self.__id
+    
+    def get_modules(self):
+        return self.__modules
+    
+    def get_average_mark(self):
+        return self.__average_mark
