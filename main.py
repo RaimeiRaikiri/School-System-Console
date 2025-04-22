@@ -12,7 +12,7 @@ def read_files(module_file_name: str, students_file_name: str) -> tuple[dict, di
     return modules_data_object, students_data_object
     
 def insert_modules_in_system(modules_data: dict, school_system: system) -> None:
-    # Iterates over the dictionary keys (module names) and adds each module to the school system obj
+    # Iterates over the dictionary keys (module names) and adds each module to the school system object
     for module_key in modules_data.keys():
         
         module = modules.Module(module_key, modules_data[module_key])
